@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+
+  <!-- Header -->
+
+  {% block main %}
+
+    <section class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h3 class="card-title text-center text-primary mb-4">🎂 Add a New Cake</h3>
+            <form method="POST" action="" enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+              <div class="mb-3">
+                <label class="form-label">Cake Name</label>
+                <!-- <input type="text" name="name" class="form-control" required> -->
+                 {{form.name}}
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Description</label>
+                <!-- <textarea name="description" rows="3" class="form-control" required></textarea> -->
+                 {{form.desciption}}
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Photo</label>
+                <!-- <input type="file" name="photo" class="form-control" required> -->
+                 {{form.photo}}
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Category</label>
+                  <!-- <select name="category" class="form-select" required>
+                    <option>Wedding Cakes</option>
+                    <option>Birthday Cakes</option>
+                    <option>Plum Cakes</option>
+                    <option>Cup Cakes</option>
+                  </select> -->
+                  {{form.categorey}}
+                </div>
+
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Flavour</label>
+                  <!-- <select name="flavour" class="form-select" required>
+                    <option>Vanilla</option>
+                    <option>Chocolate</option>
+                    <option>Red velvet</option>
+                    <option>Strawberry</option>
+                    <option>Lemon</option>
+                    <option>Carrot</option>
+                    <option>Black Forest</option>
+                    <option>Coconut</option>
+                    <option>Tiramisu</option>
+                    <option>Mocha</option>
+                    <option>Other</option>
+                  </select> -->
+                  {{form.flavour}}
+                </div>
+
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Shape</label>
+                  <!-- <select name="shape" class="form-select" required>
+                    <option>Round</option>
+                    <option>Square</option>
+                    <option>Rectangle</option>
+                    <option>Heart</option>
+                    <option>Hexagon</option>
+                    <option>Oval</option>
+                    <option>Tiered</option>
+                    <option>Doll Shape</option>
+                    <option>Photo Cake</option>
+                    <option>Other</option>
+                  </select> -->
+                  {{form.shape}}
+                </div>
+
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Weight</label>
+                  <!-- <select name="weight" class="form-select" required>
+                    <option>0.5 kg</option>
+                    <option>1 kg</option>
+                    <option>2 kg</option>
+                    <option>3 kg</option>
+                    <option>5 kg</option>
+                  </select> -->
+                  {{form.weight}}
+                </div>
+
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Egg Status</label>
+                  <!-- <select name="egg_sts" class="form-select" required>
+                    <option>Egg</option>
+                    <option>Eggless</option>
+                  </select> -->
+                  {{form.egg_sts}}
+                </div>
+
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Toppings</label>
+                  <!-- <select name="toppings" class="form-select" required>
+                    <option>No</option>
+                    <option>Choco chips</option>
+                    <option>Sprinkles</option>
+                    <option>Fresh fruit</option>
+                    <option>Nuts</option>
+                    <option>Whipped cream</option>
+                    <option>Chocolate drizzle</option>
+                    <option>Caramel drizzle</option>
+                  </select> -->
+                  {{form.toppings}}
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Availability</label>
+                    {% for radio in form.is_available %}
+                    <div class="form-check form-check-inline">
+                        {{radio.tag}} 
+                    <!-- <input type="radio" class="form-check-input" value="True" name="is_available" id=""> -->
+                    <label for="is_available" class="form-check-label">{{radio.choice_label}}</label>
+                    </div>
+                    {% endfor %}
+                    <!-- <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" value="False" name="is_available" id="">
+                    <label for="is_available" class="form-check-label">No</label>
+                    </div> -->
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Price</label>
+                    <!-- <input type="text" name="price" class="form-control" required> -->
+                     {{form.price}}
+                </div>
+                
+              </div>
+
+              <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary px-4">Add</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>#arrow-right
+
+  {% endblock %}
+
+  <!-- Footer -->

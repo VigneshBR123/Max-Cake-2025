@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+
+    <section class="container my-5">
+        <div class="row g-4">
+            <!-- Cake Image -->
+            <div class="col-md-6">
+            <div class="card shadow-sm">
+                <img src="{{cake.photo.url}}" class="card-img-top" alt="Cake">
+
+            </div>
+            </div>
+
+            <!-- Cake Info -->
+            <div class="col-md-6">
+
+                <div class="d-flex justify-content-start align-items-center mb-2">
+                    <h1 class="fw-bold mb-0">{{cake.name}}</h1>
+                    <div class="mx-3">
+                    <a href="{% url 'cake_update' cake.uuid %}" class="text-primary me-2 btn">
+                        <i class="fa-solid fa-pen"></i>
+                    </a>
+
+                    <!-- Delete navigated to confirmation div -->
+                    <a href="" class="text-primary btn" data-bs-toggle="modal" data-bs-target="#delete-confirm">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
+                    </div>
+                </div>
+
+            <p class="text-muted">{{cake.desciption}}</p>
+            
+            <h3 class="fw-bold text-primary">₹{{cake.price}}</h3>
+            
+            <ul class="list-group list-group-flush my-4">
+                <li class="list-group-item"><strong>Category: </strong>{{cake.categorey}}</li>
+                <li class="list-group-item"><strong>Weight: </strong>{{cake.weight}}</li>
+                <li class="list-group-item"><strong>Flavor: </strong>{{cake.flavour}}</li>
+                <li class="list-group-item"><strong>Shape: </strong>{{cake.shape}}</li>
+                <li class="list-group-item"><strong>Toppings: </strong>{{cake.toppings}}</li>
+                <li class="list-group-item"><strong>Contains Egg: </strong>{% if cake.egg_sts == 'Egg' %} <i style="color: greenyellow; font-weight: bold;" class="fa-solid fa-check"></i> {% else %} <i style="color: red;" class="fa-solid fa-xmark"></i> {% endif %}</li>
+                <li class="list-group-item"><strong>Availability: </strong>{% if cake.is_available == True %} <i style="color: greenyellow; font-weight: bold;" class="fa-solid fa-check"></i> {% else %} <i style="color: red;" class="fa-solid fa-xmark"></i> {% endif %}</li>
+            </ul>
+
+            <div class="d-grid gap-2 mt-4">
+                <button class="btn btn-primary btn-lg">Order Now</button>
+                <button class="btn btn-outline-dark">Add to Wishlist</button>
+            </div>
+            </div>
+        </div>
+
+        <!-- Delete confirmation div -->
+        <div class="modal" id="delete-confirm">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="">Max Cakes</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p> Are you sure you want to delete the cake? </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" style="background-color: darkgray;" data-bs-dismiss="modal">No</button>
+                        <a href="{% url 'cake_delete' cake.uuid %}" class="btn btn-primary">Delete Cake</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+{% endblock %}

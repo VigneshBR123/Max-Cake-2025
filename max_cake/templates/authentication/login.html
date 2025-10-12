@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+<!-- Header -->
+
+{% block main %}
+
+<section class="container w-50 my-5">
+  <div class="card shadow-lg border-0 rounded-4">
+    <div class="card-header bg-primary text-white text-center py-3 rounded-top-4">
+      <h4 class="mb-0">User Login</h4>
+    </div>
+    <div class="card-body p-4">
+      <form method="post">
+
+        {% csrf_token %}
+
+        <!-- Email -->
+        <div class="mb-3">
+          <label for="email" class="form-label fw-semibold">Email Address</label>
+          <!-- <input type="email" class="form-control form-control-lg" id="email" placeholder="Enter your email"> -->
+            {{ form.username }}
+        </div>
+
+        <!-- Password -->
+        <div class="mb-4">
+          <label for="password" class="form-label fw-semibold">Password</label>
+          <!-- <input type="password" class="form-control form-control-lg" id="password" placeholder="Enter your password"> -->
+            {{ form.password }}
+        </div>
+
+        <!-- Submit Button -->
+        <div class="d-grid align-items-center justify-content-center mb-3">
+          <button type="submit" class="btn btn-primary btn-lg shadow-sm">
+            Login
+          </button>
+        </div>
+
+        <!-- Extra Links -->
+        <div class="text-center">
+          {% if msg %}
+            <p style="color: red;"> {{ msg }} </p>
+          {% endif %}
+          <a href="#" class="text-decoration-none">Forgot Password?</a> <br>
+          <span class="text-muted">Don't have an account? </span>
+          <a href="{% url 'register' %}" class="fw-semibold text-primary text-decoration-none">Register</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
