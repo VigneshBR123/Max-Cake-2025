@@ -8,10 +8,17 @@ from .forms import AddCakeForm
 
 from django.db.models import Q
 
+from django.contrib.auth.decorators import login_required
+
+from django.utils.decorators import method_decorator
+
+from authentication.permission import permission_role
+
 # Create your views here.
 
 # Home Page
 
+# @method_decorator(login_required(login_url='login'), name='dispatch')
 class HomeView(View):
 
     def get(self,request,*args,**kwargs):
@@ -85,6 +92,7 @@ class AboutUsView(View):
 
         return render(request, 'cakes/about_us.html', context=data)
     
+@method_decorator(permission_role(roles=['Admin', 'User']), name='dispatch')
 class AddCakeView(View):
 
     form_class = AddCakeForm
