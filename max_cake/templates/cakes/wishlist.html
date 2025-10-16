@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+    {% for cake in wishlist.all %}
+
+        <p>{{cake.name}}</p>
+
+    {% endfor %}
+
+{% endblock %}

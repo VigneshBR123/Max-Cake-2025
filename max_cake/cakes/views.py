@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 
 from django.views import View
 
-from .models import Cakes
+from .models import Cakes, WishList
 
 from .forms import AddCakeForm
 
@@ -223,3 +223,21 @@ class CakeDeleteView(View):
         cake.save()
 
         return redirect('home') 
+    
+
+# @method_decorator(permission_role(roles=['User']), name='dispatch')
+class WishListView(View):
+
+    def get(self,request,*args,**kwargs):
+
+        wishlist = WishList.objects.filter(user = request.user)
+
+        # wishlist = request.user.wishlist
+
+        print(wishlist)
+
+        data = {
+            "wishlist": wishlist
+        }
+
+        return render(request, 'cakes/wishlist.html', context=data)

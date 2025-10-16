@@ -165,3 +165,17 @@ class Cakes(BaseClass):
     def __str__(self):
         # return f'{self.name}-{self.categorey}-{self.weight}'
         return f'{self.name}-{self.categorey.name}-{self.weight.value}'
+    
+class WishList(BaseClass):
+    
+    user = models.OneToOneField('authentication.Profile', on_delete=models.CASCADE)
+
+    cakes = models.ManyToManyField('Cakes', null=True, blank=True)
+
+    class Meta:
+
+        verbose_name = 'WishList'
+        verbose_name_plural = 'WishList'
+
+    def __str__(self):
+        return f'{self.user.first_name}-{self.user.last_name}-WishList'

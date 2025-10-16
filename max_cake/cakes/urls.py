@@ -10,4 +10,5 @@ urlpatterns = [
     path('cake_details/<str:uuid>/', views.CakeDetailsView.as_view(), name='cake_details'),
     path('cake_update/<str:uuid>/', views.CakeUpdateView.as_view(), name='cake_update'),
     path('cake_delete/<str:uuid>/', views.CakeDeleteView.as_view(), name='cake_delete'),
+    path('wishlist/', views.WishListView.as_view(), name='cake_wishlist'),
 ]
