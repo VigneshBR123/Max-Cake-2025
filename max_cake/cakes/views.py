@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 
 from django.views import View
 
-from .models import Cakes, WishList
+from .models import Cakes, WishList, Cart
 
 from .forms import AddCakeForm
 
@@ -241,3 +241,57 @@ class WishListView(View):
         }
 
         return render(request, 'cakes/wishlist.html', context=data)
+
+
+# @method_decorator(permission_role(roles=['User']), name='dispatch')
+class AddToWishListView(View):
+
+    def get(self,request,*args,**kwargs):
+
+        uuid = kwargs.get("uuid")
+
+        cake = Cakes.objects.get(uuid=uuid)
+
+        wishlist = WishList.objects.get(user = request.user)
+
+        wishlist.cakes.add(cake)
+
+        return redirect('home')
+
+
+# @method_decorator(permission_role(roles=['User']), name='dispatch')
+class RemoveFromWishListView(View):
+
+    def get(self,request,*args,**kwargs):
+
+        uuid = kwargs.get("uuid")
+
+        cake = Cakes.objects.get(uuid=uuid)
+
+        wishlist = WishList.objects.get(user = request.user)
+
+        wishlist.cakes.remove(cake)
+
+        if request.GET.get("req") == "wishlist":
+
+            return redirect('cake_wishlist')
+
+        else:
+
+            return redirect('home')
+
+
+# @method_decorator(permission_role(roles=['User']), name='dispatch')
+class CartView(View):
+
+    def get(self,request,*args,**kwargs):
+
+        cart = Cart.objects.filter(user = request.user)
+
+        # cart = request.user.wishlist
+
+        data = {
+            "cart": cart
+        }
+
+        return render(request, 'cakes/cart.html', context=data)

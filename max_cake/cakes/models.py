@@ -170,7 +170,7 @@ class WishList(BaseClass):
     
     user = models.OneToOneField('authentication.Profile', on_delete=models.CASCADE)
 
-    cakes = models.ManyToManyField('Cakes', null=True, blank=True)
+    cakes = models.ManyToManyField('Cakes', blank=True)
 
     class Meta:
 
@@ -179,3 +179,17 @@ class WishList(BaseClass):
 
     def __str__(self):
         return f'{self.user.first_name}-{self.user.last_name}-WishList'
+
+class Cart(BaseClass):
+    
+    user = models.OneToOneField('authentication.Profile', on_delete=models.CASCADE)
+
+    cakes = models.ManyToManyField('Cakes', blank=True)
+
+    class Meta:
+
+        verbose_name = 'Cart'
+        verbose_name_plural = 'Cart'
+
+    def __str__(self):
+        return f'{self.user.first_name}-{self.user.last_name}-Cart'

@@ -12,6 +12,8 @@ from django.contrib.auth.hashers import make_password
 
 import threading
 
+from cakes.models import WishList
+
 class LoginView(View):
 
     form_class = LoginForm
@@ -90,6 +92,8 @@ class RegisterView(View):
             user.password = make_password(password)
 
             user.save()
+
+            WishList.objects.create(user=user)
 
             # Email Integration
 

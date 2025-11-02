@@ -11,4 +11,7 @@ urlpatterns = [
     path('cake_update/<str:uuid>/', views.CakeUpdateView.as_view(), name='cake_update'),
     path('cake_delete/<str:uuid>/', views.CakeDeleteView.as_view(), name='cake_delete'),
     path('wishlist/', views.WishListView.as_view(), name='cake_wishlist'),
+    path('add-to-wishlist/<str:uuid>/', views.AddToWishListView.as_view(), name='add-to-wishlist'),
+    path('remove-from-wishlist/<str:uuid>/', views.RemoveFromWishListView.as_view(), name='remove-from-wishlist'),
+    path('cart/', views.CartView.as_view(), name='cart'),
 ]
