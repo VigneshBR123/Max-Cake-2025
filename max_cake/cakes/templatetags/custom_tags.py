@@ -10,3 +10,13 @@ def already_exists_in_wishlist(request, cake_uuid):
         return request.user.wishlist.cake.filter(uuid = cake_uuid).exists()
 
     return False
+
+
+@register.simple_tag
+def cart_list(request):
+
+    if request.user.is_authenticated and request.user.role == "user":
+
+        cakes = request.user.cart.cakes.all()
+
+        return cakes

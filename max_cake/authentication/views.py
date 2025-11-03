@@ -12,7 +12,7 @@ from django.contrib.auth.hashers import make_password
 
 import threading
 
-from cakes.models import WishList
+from cakes.models import WishList, Cart
 
 class LoginView(View):
 
@@ -94,6 +94,8 @@ class RegisterView(View):
             user.save()
 
             WishList.objects.create(user=user)
+
+            Cart.objects.create(user=user)
 
             # Email Integration
 

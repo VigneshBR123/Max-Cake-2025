@@ -279,19 +279,3 @@ class RemoveFromWishListView(View):
         else:
 
             return redirect('home')
-
-
-# @method_decorator(permission_role(roles=['User']), name='dispatch')
-class CartView(View):
-
-    def get(self,request,*args,**kwargs):
-
-        cart = Cart.objects.filter(user = request.user)
-
-        # cart = request.user.wishlist
-
-        data = {
-            "cart": cart
-        }
-
-        return render(request, 'cakes/cart.html', context=data)
