@@ -12,11 +12,11 @@ def already_exists_in_wishlist(request, cake_uuid):
     return False
 
 
-@register.simple_tag
-def cart_list(request):
+# @register.simple_tag
+# def cart_list(request):
 
-    if request.user.is_authenticated and request.user.role == "user":
+#     if request.user.is_authenticated and request.user.role == "user":
 
-        cakes = request.user.cart.cakes.all()
+#         cakes = request.user.cart.cakes.all()
 
-        return cakes
+#         return cakes

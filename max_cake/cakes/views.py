@@ -279,3 +279,19 @@ class RemoveFromWishListView(View):
         else:
 
             return redirect('home')
+
+
+# @method_decorator(permission_role(roles=['User']), name='dispatch')
+class AddToCartView(View):
+
+    def get(self,request,*args,**kwargs):
+
+        uuid = kwargs.get("uuid")
+
+        cake = Cakes.objects.get(uuid=uuid)
+
+        cart = Cart.objects.get(user = request.user)
+
+        cart.cakes.add(cake)
+
+        return redirect('home')

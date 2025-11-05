@@ -13,4 +13,5 @@ urlpatterns = [
     path('wishlist/', views.WishListView.as_view(), name='cake_wishlist'),
     path('add-to-wishlist/<str:uuid>/', views.AddToWishListView.as_view(), name='add-to-wishlist'),
     path('remove-from-wishlist/<str:uuid>/', views.RemoveFromWishListView.as_view(), name='remove-from-wishlist'),
+    path('add-to-cart/<str:uuid>/', views.AddToCartView.as_view(), name='add-to-cart'),
 ]

@@ -2,6 +2,8 @@ from django.db import models
 
 import uuid
 
+from django.db.models import Sum
+
 class BaseClass(models.Model):
 
     uuid = models.UUIDField(default=uuid.uuid4, unique=True)
@@ -185,6 +187,12 @@ class Cart(BaseClass):
     user = models.OneToOneField('authentication.Profile', on_delete=models.CASCADE)
 
     cakes = models.ManyToManyField('Cakes', blank=True)
+
+    def get_total(self):
+        
+        total = self.cakes.aggregate(price_total = Sum("price"))['price_total']
+
+        return total if total else 0
 
     class Meta:
 

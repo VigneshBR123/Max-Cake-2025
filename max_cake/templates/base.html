@@ -110,18 +110,19 @@
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
 
-    {% cart_list request as cart_cakes %}
+
 
     <div class="offcanvas-body">
       <div class="order-md-last">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
-          <span class="text-primary">{{cart_cakes | length}}</span>
+          <span class="text-primary">{% if request.user.is_authenticated and request.user.role == "user" %}{{request.user.cart.cakes.all | length}}{% else %} 0 {% endif %}</span>
           <span class="badge bg-primary rounded-circle pt-2">3</span>
         </h4>
         <ul class="list-group mb-3">
           
-          {% if cart_cakes %}
-          {% for cake in cart_cakes %}
+          {% if request.user.is_authenticated and request.user.role == "user" %}
+          {% for cake in request.user.cart.cakes.all %}
+
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <div>
               <h6 class="my-0">{{cake.name}}</h6>
@@ -129,11 +130,13 @@
             </div>
             <span class="text-body-secondary"><i class="fa-solid fa-fa-indian-rupee-sign"></i>{{cake.price}}</span>
           </li>
-          {% endfor %}
+
+          {% {% endfor %} %}
           {% endif %}
+
           <li class="list-group-item d-flex justify-content-between">
-            <span class="fw-bold">Total (USD)</span>
-            <strong>$20</strong>
+            <span class="fw-bold">Total (INR)</span>
+            <strong><i class="fa-solid fa-fa-indian-rupee-sign">{% if request.user.is_authenticated and request.user.role == "user" %} {{request.user.cart.cakes.get_total}} {% else %} 0 {% endif %}</strong>
           </li>
         </ul>
 
@@ -234,7 +237,7 @@
                 aria-controls="offcanvasCart">
                 <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
                 <span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
-                  {{cart_cakes | length}}
+                  {% if request.user.is_authenticated and request.user.role == "user" %}{{request.user.cart.cakes.all | length}}{% else %} 0 {% endif %}
                 </span>
               </a>
             </li>
@@ -328,7 +331,7 @@
                     aria-controls="offcanvasCart">
                     <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
                     <span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
-                      03
+                      {% if request.user.is_authenticated and request.user.role == "user" %}{{request.user.cart.cakes.all | length}}{% else %} 0 {% endif %}
                     </span>
                   </a>
                 </li>
